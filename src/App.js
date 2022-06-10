@@ -1,31 +1,34 @@
 import { useState, useEffect } from 'react';
 import React from 'react';
 import './App.css';
-import Doggie from './components/DogDisplay';
+import DogDisplay from './components/DogDisplay';
 
 function App() {
 
 
-const [dog, setDogs]= React.useState(null);
+const [dog, setDogs]= useState(null);
 
-const getDogs = async() => {
+const getDog = async() => {
 
-const response = await fetchh(
-  `https://dog.ceo/api/breeds/image/random `
+const response = await fetch(
+  `https://dog.ceo/api/breeds/image/random`
 );
   const data = await response.json();
-  setDogs(data);
+  console.log(data)
+  setDogs(data.message);
 
 };
 useEffect(() => {
-  getDogs();
-})
+  getDog();
+},[])
 
 
 
   return (
     <div className="App">
-      
+      <h1>Random Dog Generator</h1>
+      <input type="button" value="Get Random Dog" onClick={getDog}/>
+      <DogDisplay dogs={dog}/>
     </div>
   );
 }

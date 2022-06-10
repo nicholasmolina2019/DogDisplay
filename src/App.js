@@ -1,23 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import React from 'react';
 import './App.css';
+import Doggie from './components/DogDisplay';
 
 function App() {
+
+
+const [dog, setDogs]= React.useState(null);
+
+const getDogs = async() => {
+
+const response = await fetchh(
+  `https://dog.ceo/api/breeds/image/random `
+);
+  const data = await response.json();
+  setDogs(data);
+
+};
+useEffect(() => {
+  getDogs();
+})
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
     </div>
   );
 }
